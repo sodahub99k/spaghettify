@@ -1,7 +1,7 @@
-import Module from "../wasm/spoile.js";
+import Module from "../wasm/spaghettify.js";
 import { useState, useEffect } from "react";
 
-export const useSpoile = () => {
+export const useSpaghettify = () => {
   const [module, setModule] = useState<any>(null);
 
   useEffect(() => {
@@ -13,18 +13,18 @@ export const useSpoile = () => {
     loadModule();
   }, []);
 
-  const spoileStr = (input: string): string => {
+  const spaghettifyStr = (input: string): string => {
     if (!module) throw new Error("WASM module not loaded yet");
 
-    const spoile_c = module.cwrap("spoile_str_c", "number", ["string"]);
+    const spaghettify_c = module.cwrap("spaghettify_str_c", "number", ["string"]);
     const free = module.cwrap("free_string", "void", ["number"]);
 
-    const ptr = spoile_c(input);
+    const ptr = spaghettify_c(input);
     const result = module.UTF8ToString(ptr);
     free(ptr);
 
     return result;
   };
 
-  return { module, spoileStr };
+  return { module, spaghettifyStr };
 };

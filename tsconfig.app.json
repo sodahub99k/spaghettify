@@ -30,6 +30,6 @@
   },
   "include": [
     "src",
-    "public"
+    "public",
   ]
 }

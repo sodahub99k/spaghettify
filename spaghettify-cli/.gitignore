@@ -1,0 +1,7 @@
+bin/*
+example/input
+example/input_spaghettified
+src/spaghettify/lexer/lexer.gen.cpp
+src/spaghettify/parser/parser.output
+src/spaghettify/parser/parser.tab.*
+src/spaghettify/parser/location.hh

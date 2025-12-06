@@ -1,19 +1,18 @@
 #include <fstream>
 #include <iostream>
 #include <ctime>
-#include "spoile.hpp"
+#include "spaghettify.hpp"
 
 int main(int argc, char **argv)
 {
     if (argc != 2)
     {
-        std::cerr << "[Error] spoiler requests 1 input file." << std::endl;
+        std::cerr << "[Error] spaghettify requests 1 input file." << std::endl;
         return 1;
     }
 
     const std::string filename = argv[1];
 
-    // 入力読み込み
     std::ifstream input_file(filename);
     if (!input_file)
     {
@@ -23,13 +22,16 @@ int main(int argc, char **argv)
 
     srand((unsigned)time(NULL));
 
-    // 実際のspoile処理
     std::ostringstream result;
-    spoile(input_file, result);
+    spaghettify(input_file, result);
     input_file.close();
 
-    // 上書き保存
-    std::ofstream output_file(filename);
+    // input.c -> input_spaghettified.c
+    const std::string output_filename =
+        filename.substr(0, filename.find_last_of('.')) + "_spaghettified" +
+        filename.substr(filename.find_last_of('.'));
+
+    std::ofstream output_file(output_filename);
     if (!output_file)
     {
         std::cerr << "[Error] Cannot open file for writing: '" << filename << "'" << std::endl;

@@ -1,5 +1,5 @@
-declare module "../wasm/spoile.js" {
-  export interface SpoileModule extends EmscriptenModule {
+declare module "../wasm/spaghettify.js" {
+  export interface SpaghettifyModule extends EmscriptenModule {
     cwrap: (
       ident: string,
       returnType: string | null,
@@ -9,7 +9,7 @@ declare module "../wasm/spoile.js" {
 
   const Module: (
     options?: Partial<EmscriptenModule>
-  ) => Promise<SpoileModule>;
+  ) => Promise<SpaghettifyModule>;
 
   export default Module;
 }

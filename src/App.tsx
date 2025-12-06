@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import Editor, { loader } from "@monaco-editor/react";
-import { useSpoile } from "./hooks/useSpoile";
+import { useSpaghettify } from "./hooks/useSpaghettify";
 
 const DEFAULT_CODE = String.raw`#define MAXLEN 60
 
@@ -68,9 +68,8 @@ const theme = {
 loader.init().then((monaco) => {
   monaco.editor.defineTheme("oneMonokai", theme as any);
 });
-
-export const App: React.FC = () => {
-  const { spoileStr, module } = useSpoile();
+const App: React.FC = () => {
+  const { spaghettifyStr, module } = useSpaghettify();
   const [input, setInput] = useState(DEFAULT_CODE);
   const [output, setOutput] = useState("");
 
@@ -83,7 +82,7 @@ export const App: React.FC = () => {
     if (!module) return;
     let out = "";
     try {
-      out = spoileStr(input);
+      out = spaghettifyStr(input);
     } catch {
       out = "";
     }
@@ -98,8 +97,8 @@ export const App: React.FC = () => {
 
       {/* ---- Header ---- */}
       <header className="max-w-4xl w-full mx-auto text-center mb-4">
-        <h1 className="flex justify-center items-center gap-2 text-3xl font-bold tracking-wide mb-2 drop-shadow-md">
-          逆フォーマッター
+        <h1 className="flex justify-center items-center gap-6 text-3xl font-bold tracking-wide mb-2 drop-shadow-md">
+          逆フォーマッター "Spaghettify" 🍝
           <span className="text-base font-medium text-gray-300 flex items-baseline gap-1">
             <span className="text-sm">by</span>
             <a
@@ -112,7 +111,9 @@ export const App: React.FC = () => {
         </h1>
 
         <p className="text-gray-400 text-sm leading-relaxed">
-          フォーマッターの逆で，C言語を実行可能なまま読みにくくするツール。技術的にはbison/flexでコードを抽象構文木に変換し，再帰的に走査して文法に影響のない部分にランダムな空白or改行を挿入するC++関数をWASMにコンパイルしてReactから呼び出しています。
+          フォーマッターの逆で，C言語を実行可能なまま読みにくくするツール <a href="https://github.com/sodahub99k/spaghettify" className=" text-emerald-400 hover:text-emerald-300 transition">spaghettify</a>のWASM版を試せるデモサイト．
+          <br />
+          c++/flexでコードをトークンに分割し，bisonで文法に影響のない部分にランダムな空白or改行を挿入しつつコードに再変換する．
         </p>
       </header>
 
@@ -208,3 +209,5 @@ export const App: React.FC = () => {
     </div>
   );
 };
+
+export default App;

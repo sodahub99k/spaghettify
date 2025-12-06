@@ -1,24 +1,24 @@
-// src/spoiler/wasm/spoile_wasm.cpp
+// src/spaghettify/wasm/spaghettify_wasm.cpp
 #include <cstring>
 #include <cstdlib>
 #include <string>
 #include <sstream>
 
-#include "../main/spoile.hpp"
+#include "../main/spaghettify.hpp"
 
 extern "C"
 {
 
   // C 文字列を受け取り、結果文字列を malloc して返す。
   // 呼び出し側は必ず free_string() で解放すること。
-  char *spoile_str_c(const char *input)
+  char *spaghettify_str_c(const char *input)
   {
     if (!input)
       return nullptr;
     try
     {
       std::string in(input);
-      std::string out = spoile_str(in);
+      std::string out = spaghettify_str(in);
 
       // malloc で領域を確保して返す（JS 側で _free を使って解放）
       char *res = (char *)malloc(out.size() + 1);

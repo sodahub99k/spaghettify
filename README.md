@@ -1,73 +1,25 @@
-# React + TypeScript + Vite
+# spaghettify
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+フォーマッターの逆で，C言語を実行可能なまま読みにくくするツール "spaghettify"と，それをWeb上で試せるデモサイト．
+c++/flexでコードをトークンに分割し，bisonで文法に影響のない部分にランダムな空白or改行を挿入しつつコードに再変換するCLIツールとして実装されている．
 
-Currently, two official plugins are available:
+## デモサイト
+#### https://sodahub99k.github.io/spaghettify/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+画面左側`Input`にC言語コードを入力し，画面中央の`変換&コピー`ボタンを押すと，右側`Output`にspaghettifyされたコードが表示される．
 
-## React Compiler
+![alt text](spaghettify_demo.jpeg)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## リポジトリ構成
+- `spaghettify-cli/...` - spaghettifyのCLIツール
+- `src/...` - spaghettifyのデモサイト
 
-## Expanding the ESLint configuration
+## ビルド方法
+1. `spaghettify-cli`ディレクトリに移動し，`make`でビルド
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 使用例
+1. `bin/spaghettify example/input.c` -> `input_spaghettified.c` というファイルが生成される
+2. `gcc example/input.c -o example/input && ./example/input` (元のコードのコンパイル&実行)
+3. `gcc example/input_spaghettified.c -o example/input_spaghettified && ./example/input_spaghettified` (spaghettifyされたコードのコンパイル&実行)
+  
+-> 元のコードと同じ出力が得られるはず

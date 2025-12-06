@@ -3,7 +3,7 @@
 ########################################
 
 WEB_WASM_DIR := ../src/wasm
-ROOT    := src/spoiler
+ROOT    := src/spaghettify
 BIN     := bin
 FLEX    := /opt/homebrew/opt/flex/bin/flex
 FLEXINC := /opt/homebrew/opt/flex/include
@@ -20,7 +20,7 @@ PARSER  := $(ROOT)/parser/parser.tab.cc
 
 COMMON  := \
 	$(ROOT)/driver/driver.cpp \
-	$(ROOT)/main/spoile.cpp
+	$(ROOT)/main/spaghettify.cpp
 
 NATIVE_SRCS := \
 	$(LEXER) \
@@ -32,15 +32,15 @@ WASM_SRCS := \
 	$(LEXER) \
 	$(PARSER) \
 	$(COMMON) \
-	$(ROOT)/wasm/spoile_wasm.cpp
+	$(ROOT)/wasm/spaghettify_wasm.cpp
 
 ########################################
 # Output files
 ########################################
 
-NATIVE_OUT  := $(BIN)/spoiler
-WASM_JS     := $(BIN)/spoile.js
-WASM_WASM   := $(BIN)/spoile.wasm
+NATIVE_OUT  := $(BIN)/spaghettify
+WASM_JS     := $(BIN)/spaghettify.js
+WASM_WASM   := $(BIN)/spaghettify.wasm
 
 ########################################
 # Flags
@@ -55,7 +55,7 @@ LDFLAGS_WASM := \
   -s ALLOW_MEMORY_GROWTH=1 \
   -s EXPORT_ES6=1 \
   -s MODULARIZE=1 \
-  -s EXPORTED_FUNCTIONS='["_spoile_str_c","_free_string","_malloc","_free"]' \
+  -s EXPORTED_FUNCTIONS='["_spaghettify_str_c","_free_string","_malloc","_free"]' \
   -s EXPORTED_RUNTIME_METHODS='["cwrap","UTF8ToString"]'
 
 ########################################
@@ -101,9 +101,9 @@ $(WASM_JS): $(LEXER) $(PARSER)
 	@$(EMXX) $(EMFLAGS) $(LDFLAGS_WASM) \
 		$(WASM_SRCS) \
 		-o $@
-	@printf "\033[36m[WASM]\033[0m Generated: %s %s\n" "$(BIN)/spoile.js" "$(BIN)/spoile.wasm"
-	@cp $(BIN)/spoile.wasm $(WEB_WASM_DIR)/spoile.wasm
-	@cp $(BIN)/spoile.js $(WEB_WASM_DIR)/spoile.js
+	@printf "\033[36m[WASM]\033[0m Generated: %s %s\n" "$(BIN)/spaghettify.js" "$(BIN)/spaghettify.wasm"
+	@cp $(BIN)/spaghettify.wasm $(WEB_WASM_DIR)/spaghettify.wasm
+	@cp $(BIN)/spaghettify.js $(WEB_WASM_DIR)/spaghettify.js
 
 ########################################
 # Flex / Bison
