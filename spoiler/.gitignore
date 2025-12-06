@@ -1,0 +1,6 @@
+bin/*
+example/input
+src/spoiler/lexer/lexer.gen.cpp
+src/spoiler/parser/parser.output
+src/spoiler/parser/parser.tab.*
+src/spoiler/parser/location.hh
