@@ -2,7 +2,7 @@
 # Paths
 ########################################
 
-PUBLIC := ../public
+WEB_WASM_DIR := ../src/wasm
 ROOT    := src/spoiler
 BIN     := bin
 FLEX    := /opt/homebrew/opt/flex/bin/flex
@@ -102,8 +102,8 @@ $(WASM_JS): $(LEXER) $(PARSER)
 		$(WASM_SRCS) \
 		-o $@
 	@printf "\033[36m[WASM]\033[0m Generated: %s %s\n" "$(BIN)/spoile.js" "$(BIN)/spoile.wasm"
-	@cp $(BIN)/spoile.wasm $(PUBLIC)/spoile.wasm
-	@cp $(BIN)/spoile.js $(PUBLIC)/spoile.js
+	@cp $(BIN)/spoile.wasm $(WEB_WASM_DIR)/spoile.wasm
+	@cp $(BIN)/spoile.js $(WEB_WASM_DIR)/spoile.js
 
 ########################################
 # Flex / Bison

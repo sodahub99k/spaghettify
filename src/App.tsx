@@ -66,7 +66,7 @@ const theme = {
 
 
 loader.init().then((monaco) => {
-  monaco.editor.defineTheme("oneMonokai", theme);
+  monaco.editor.defineTheme("oneMonokai", theme as any);
 });
 
 export const App: React.FC = () => {

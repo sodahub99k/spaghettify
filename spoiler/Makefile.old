@@ -1,0 +1,31 @@
+root = src/spoiler
+FLEX = /opt/homebrew/opt/flex/bin/flex
+FLEX_INC = /opt/homebrew/opt/flex/include
+
+CXXFLAGS = -I $(FLEX_INC) -I src -g -Wall -Wextra -std=c++11 -O4
+
+.PHONY: all clean run
+
+all: clean bin/spoiler
+
+clean:
+	@printf "\e[33m[%s]\e[0m\n" "clean"
+	@rm -rf bin/*
+	@rm -f $(root)/lexer/lexer.gen.* $(root)/parser/parser.tab.* $(root)/parser/location.hh $(root)/parser/parser.output
+
+run: bin/spoiler example/input.c
+	@printf "\e[33m[%s]\e[0m\n" "run"
+	@./bin/spoiler example/input.c
+
+bin/spoiler: $(root)/lexer/lexer.gen.cpp $(root)/parser/parser.tab.cc $(root)/driver/driver.cpp $(root)/main/spoile.cpp $(root)/main/main.cpp
+	@mkdir -p bin
+	@printf "\e[33m[%s]\e[0m\n" "$^ -> $@"
+	@g++ $(CXXFLAGS) -o $@ $^
+
+$(root)/parser/parser.tab.cc: $(root)/parser/parser.yy
+	@printf "\e[33m[%s]\e[0m\n" "$^ -> $@"
+	@bison -v -o $@ $^
+
+$(root)/lexer/lexer.gen.cpp: $(root)/lexer/lexer.ll
+	@printf "\e[33m[%s]\e[0m\n" "$^ -> $@"
+	@$(FLEX) --c++ --outfile=$@ $^
