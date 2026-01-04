@@ -99,21 +99,13 @@ const App: React.FC = () => {
       <header className="max-w-4xl w-full mx-auto text-center mb-4">
         <h1 className="flex justify-center items-center gap-6 text-3xl font-bold tracking-wide mb-2 drop-shadow-md">
           逆フォーマッター "Spaghettify" 🍝
-          <span className="text-base font-medium text-gray-300 flex items-baseline gap-1">
-            <span className="text-sm">by</span>
-            <a
-              href="https://sodahub99k.github.io"
-              className="text-sm text-emerald-400 hover:text-emerald-300 transition"
-            >
-              soda
-            </a>
-          </span>
         </h1>
 
         <p className="text-gray-400 text-sm leading-relaxed">
-          フォーマッターの逆で，C言語を実行可能なまま読みにくくするツール <a href="https://github.com/sodahub99k/spaghettify" className=" text-emerald-400 hover:text-emerald-300 transition">spaghettify</a>のWASM版を試せるデモサイト．
+          フォーマッターの逆で，C言語を実行可能なまま読みにくくする自作CLIツール <a href="https://github.com/sodahub99k/spaghettify" className=" text-emerald-400 hover:text-emerald-300 transition">spaghettify</a>(スパゲティファイ)を試せるデモサイト．
           <br />
-          c++/flexでコードをトークンに分割し，bisonで文法に影響のない部分にランダムな空白or改行を挿入しつつコードに再変換する．
+          c++/flexでコードをトークンに分割し，bisonで文法に影響のない部分にランダムな空白or改行を挿入しつつコードに再変換する． <br />
+          嫌な上司にコードを読ませる時などにどうぞ．
         </p>
       </header>
 
