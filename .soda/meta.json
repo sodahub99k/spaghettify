@@ -3,9 +3,6 @@
   "description": "C言語を読みにくくする新発想の\"逆フォーマッター\"。嫌な上司にコードを読ませる時などにどうぞ。",
   "category": "tool",
   "featured": true,
-  "status": "stable"
+  "status": "stable",
+  "visible": true
 }
-
-
-
-  
