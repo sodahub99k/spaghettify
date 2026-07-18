@@ -1,8 +1,8 @@
 {
-  "name": "逆フォーマッター「Spaghettify」",
+  "title": "逆フォーマッター「Spaghettify」",
   "description": "C言語を読みにくくする新発想の\"逆フォーマッター\"。嫌な上司にコードを読ませる時などにどうぞ。",
   "category": "tool",
   "featured": true,
-  "status": "stable",
+
   "visible": true
 }
